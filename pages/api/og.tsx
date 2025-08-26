@@ -9,7 +9,7 @@ export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
 
-    const title = searchParams.get('title') || 'Tiles Launcher'
+    const title = searchParams.get('title') || 'Tilekit'
 
     return new ImageResponse(
       (
@@ -39,7 +39,7 @@ export default async function handler(req: NextRequest) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: title !== 'Tiles Launcher' ? 40 : 0,
+                marginBottom: title !== 'Tilekit' ? 40 : 0,
               }}
             >
               <div
@@ -80,10 +80,10 @@ export default async function handler(req: NextRequest) {
                 </div>
               </div>
               <span style={{ fontSize: 110, fontWeight: 600 }}>
-                Tiles Launcher
+                Tilekit
               </span>
             </div>
-            {title !== 'Tiles Launcher' && (
+            {title !== 'Tilekit' && (
               <div
                 style={{
                   fontSize: 28,
