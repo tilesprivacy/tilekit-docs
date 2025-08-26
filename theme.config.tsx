@@ -19,6 +19,30 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'Tilekit',
   },
+  // OpenGraph configuration
+  head: (
+    <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta property="og:site_name" content="Tilekit" />
+      <meta property="og:locale" content="en_US" />
+      <meta name="twitter:site" content="@tileslauncher" />
+      <meta name="twitter:creator" content="@tileslauncher" />
+      <meta name="theme-color" content="#667eea" />
+    </>
+  ),
+  // Custom theme colors
+  primaryHue: {
+    dark: 250,
+    light: 250,
+  },
+  primarySaturation: {
+    dark: 100,
+    light: 100,
+  },
+  // Custom theme provider for OpenGraph
+  components: {
+    // This will be handled by our custom _app.tsx
+  },
 }
 
 export default config

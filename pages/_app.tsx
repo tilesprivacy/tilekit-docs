@@ -1,0 +1,24 @@
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import { OpenGraph } from '../components/OpenGraph'
+
+export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+  
+  // Get page-specific metadata from frontmatter or props
+  const pageTitle = (pageProps as any)?.title || 'Tilekit'
+  const pageDescription = (pageProps as any)?.description || 'Monorepo hosting both in-house and vendored libraries and tools powering the Tiles Launcher.'
+  const pageType = (pageProps as any)?.type || 'website'
+  
+  return (
+    <>
+      <OpenGraph
+        title={pageTitle}
+        description={pageDescription}
+        type={pageType}
+        url={router.asPath}
+      />
+      <Component {...pageProps} />
+    </>
+  )
+}
