@@ -18,10 +18,13 @@ export const Logo: React.FC<LogoProps> = ({
       viewBox="0 0 28 28" 
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      style={{
+        '--logo-fill': 'var(--tw-prose-body)',
+      } as React.CSSProperties}
     >
-      <rect x="0" y="0" width="12" height="12" fill="#000000" rx="4" ry="4" />
-      <rect x="16" y="0" width="12" height="12" fill="#000000" rx="4" ry="4" />
-      <rect x="0" y="16" width="12" height="12" fill="#000000" rx="4" ry="4" />
+      <rect x="0" y="0" width="12" height="12" fill="currentColor" rx="4" ry="4" />
+      <rect x="16" y="0" width="12" height="12" fill="currentColor" rx="4" ry="4" />
+      <rect x="0" y="16" width="12" height="12" fill="currentColor" rx="4" ry="4" />
     </svg>
   )
 }
