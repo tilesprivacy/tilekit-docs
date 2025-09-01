@@ -10,8 +10,8 @@ export default async function handler(req: NextRequest) {
     const { searchParams } = new URL(req.url)
     
     // Get dynamic parameters
-    const title = searchParams.get('title') || 'Tilekit'
-    const description = searchParams.get('description') || 'Monorepo hosting both in-house and vendored libraries and tools powering the Tiles Launcher.'
+    const title = searchParams.get('title') || 'A cross-platform Ollama compatible Modelfile toolchain'
+    const description = searchParams.get('description') || 'Tilekit makes it easier to build, run, and share fine-tuned open models across devices.'
     const type = searchParams.get('type') || 'default'
     
     // Note: Using system fonts for better compatibility

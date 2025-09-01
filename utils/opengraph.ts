@@ -17,14 +17,14 @@ export function generateOpenGraphData(
   content?: string,
   path?: string
 ): OpenGraphData {
-  // Extract title from frontmatter or generate from path
-  const title = frontmatter.title || 
-    (path ? path.split('/').pop()?.replace(/\.mdx?$/, '').replace(/[-_]/g, ' ') : 'Tilekit')
+  // Extract title from frontmatter or use global default
+  const title = frontmatter.title ||
+    'A cross-platform Ollama compatible Modelfile toolchain'
   
   // Extract description from frontmatter or generate from content
   const description = frontmatter.description || 
     frontmatter.excerpt ||
-    (content ? extractDescription(content) : 'Monorepo hosting both in-house and vendored libraries and tools powering the Tiles Launcher.')
+    (content ? extractDescription(content) : 'Tilekit makes it easier to build, run, and share fine-tuned open models across devices.')
   
   // Determine content type based on path or frontmatter
   const type = frontmatter.type || 

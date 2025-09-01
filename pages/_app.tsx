@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   
   // Get page-specific metadata from frontmatter or props
   const pageTitle = (pageProps as any)?.title || 'Tilekit'
-  const pageDescription = (pageProps as any)?.description || 'Monorepo hosting both in-house and vendored libraries and tools powering the Tiles Launcher.'
+  const pageDescription = (pageProps as any)?.description || 'Tilekit makes it easier to build, run, and share fine-tuned open models across devices.'
   const pageType = (pageProps as any)?.type || 'website'
   
   return (

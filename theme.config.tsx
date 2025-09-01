@@ -32,12 +32,12 @@ const config: DocsThemeConfig = {
   ),
   // Custom theme colors
   primaryHue: {
-    dark: 250,
-    light: 250,
+    dark: 0, // Black (0 degrees = black)
+    light: 0, // Black (0 degrees = black)
   },
   primarySaturation: {
-    dark: 100,
-    light: 100,
+    dark: 0, // 0% saturation for pure black/white
+    light: 0, // 0% saturation for pure black/white
   },
   // Custom theme provider for OpenGraph
   components: {

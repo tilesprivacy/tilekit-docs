@@ -15,8 +15,8 @@ interface OpenGraphProps {
 }
 
 export function OpenGraph({
-  title = 'Tilekit',
-  description = 'Monorepo hosting both in-house and vendored libraries and tools powering the Tiles Launcher.',
+  title = 'A cross-platform Ollama compatible Modelfile toolchain',
+  description = 'Tilekit makes it easier to build, run, and share fine-tuned open models across devices.',
   type = 'website',
   url,
   image,
