@@ -10,8 +10,8 @@ export default async function handler(req: NextRequest) {
     const { searchParams } = new URL(req.url)
     
     // Get dynamic parameters
-    const title = searchParams.get('title') || 'A cross-platform Ollama compatible Modelfile toolchain'
-    const description = searchParams.get('description') || 'Tilekit makes it easier to build, run, and share fine-tuned open models across devices.'
+    const title = searchParams.get('title') || 'Modelfile based decentralized version control system for model weights.'
+    const description = searchParams.get('description') || 'Tilekit makes it easier to build, run, and share fine-tuned open models.'
     const type = searchParams.get('type') || 'default'
     
     // Note: Using system fonts for better compatibility

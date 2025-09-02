@@ -1,6 +1,6 @@
 # Tilekit
 
-Tilekit is a cross-platform Ollama compatible [Modelfile](https://ollama.readthedocs.io/en/modelfile/) toolchain that makes it easier to build, run, and share fine-tuned open models across devices.
+Tilekit is a [Modelfile](https://ollama.readthedocs.io/en/modelfile/) based decentralized version control system for model weights.
 
 ## Quick Start
 

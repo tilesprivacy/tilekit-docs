@@ -15,8 +15,8 @@ interface OpenGraphProps {
 }
 
 export function OpenGraph({
-  title = 'A cross-platform Ollama compatible Modelfile toolchain',
-  description = 'Tilekit makes it easier to build, run, and share fine-tuned open models across devices.',
+  title = 'Modelfile based decentralized version control system for model weights.',
+  description = 'Tilekit makes it easier to build, run, and share fine-tuned open models.',
   type = 'website',
   url,
   image,

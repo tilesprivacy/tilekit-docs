@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   
   // Get page-specific metadata from frontmatter or props
   const pageTitle = (pageProps as any)?.title || 'Tilekit'
-  const pageDescription = (pageProps as any)?.description || 'Tilekit makes it easier to build, run, and share fine-tuned open models across devices.'
+  const pageDescription = (pageProps as any)?.description || 'Tilekit makes it easier to build, run, and share fine-tuned open models.'
   const pageType = (pageProps as any)?.type || 'website'
   
   return (
