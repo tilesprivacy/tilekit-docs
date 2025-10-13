@@ -7,8 +7,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
   
   // Get page-specific metadata from frontmatter or props
-  const pageTitle = (pageProps as any)?.title || 'Tilekit'
-  const pageDescription = (pageProps as any)?.description || 'Tilekit makes it easier to build, run, and share fine-tuned open models.'
+  const pageTitle = (pageProps as any)?.title || 'Modelfile based declarative, cross-platform blueprint that allows developers to customize open models.'
+  const pageDescription = (pageProps as any)?.description || 'Our goal is to evolve Modelfile in collaboration with the community and establish it as the standard for model customization.'
   const pageType = (pageProps as any)?.type || 'website'
   
   return (

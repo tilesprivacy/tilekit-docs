@@ -15,8 +15,8 @@ interface OpenGraphProps {
 }
 
 export function OpenGraph({
-  title = 'Modelfile based decentralized version control system for model weights.',
-  description = 'Tilekit makes it easier to build, run, and share fine-tuned open models.',
+  title = 'Modelfile based declarative, cross-platform blueprint that allows developers to customize open models.',
+  description = 'Our goal is to evolve Modelfile in collaboration with the community and establish it as the standard for model customization.',
   type = 'website',
   url,
   image,

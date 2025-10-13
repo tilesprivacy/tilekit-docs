@@ -19,12 +19,12 @@ export function generateOpenGraphData(
 ): OpenGraphData {
   // Extract title from frontmatter or use global default
   const title = frontmatter.title ||
-    'Modelfile based decentralized version control system for model weights.'
+    'Modelfile based declarative, cross-platform blueprint that allows developers to customize open models.'
   
   // Extract description from frontmatter or generate from content
   const description = frontmatter.description || 
     frontmatter.excerpt ||
-    (content ? extractDescription(content) : 'Tilekit makes it easier to build, run, and share fine-tuned open models.')
+    (content ? extractDescription(content) : 'Our goal is to evolve Modelfile in collaboration with the community and establish it as the standard for model customization.')
   
   // Determine content type based on path or frontmatter
   const type = frontmatter.type || 
