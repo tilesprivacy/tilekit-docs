@@ -10,7 +10,7 @@ const config: DocsThemeConfig = {
     </div>
   ),
   project: {
-    link: 'https://github.com/tileshq',
+    link: 'https://github.com/tilesprivacy',
   },
   chat: {
     link: 'https://go.tiles.run/discord',
