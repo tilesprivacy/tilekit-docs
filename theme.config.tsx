@@ -10,12 +10,12 @@ const config: DocsThemeConfig = {
     </div>
   ),
   project: {
-    link: 'https://github.com/tilesprivacy',
+    link: 'https://github.com/tilesprivacy/tilekit',
   },
   chat: {
     link: 'https://go.tiles.run/discord',
   },
-  docsRepositoryBase: 'https://github.com/tilesprivacy/tilekit',
+  docsRepositoryBase: 'https://github.com/tilesprivacy/tilekit-docs',
   footer: {
     text: 'Tilekit',
   },
