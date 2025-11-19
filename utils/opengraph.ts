@@ -13,22 +13,42 @@ export interface OpenGraphData {
   twitterCreator?: string
 }
 
+function removeNextra(text: string): string {
+  if (!text) return text
+  // Remove "nextra" (case-insensitive) from the text
+  // Handles various patterns like " - Nextra", " | Nextra", "Nextra -", etc.
+  return text
+    .replace(/\s*[-|–—]\s*nextra\s*/gi, '')
+    .replace(/\s*nextra\s*[-|–—]\s*/gi, '')
+    .replace(/\s+nextra\s+/gi, ' ')
+    .replace(/^nextra\s+/gi, '')
+    .replace(/\s+nextra$/gi, '')
+    .trim()
+}
+
 export function generateOpenGraphData(
   frontmatter: Record<string, any> = {},
   content?: string,
   path?: string
 ): OpenGraphData {
   // Extract title from frontmatter or use global default
-  const title = frontmatter.ogTitle ||
+  const rawTitle = frontmatter.ogTitle ||
     frontmatter.title ||
     'Tilekit: Modelfile based SDK that lets developers customize open models and agent experiences.'
-  const documentTitle = frontmatter.title ||
+  const rawDocumentTitle = frontmatter.title ||
     'Modelfile based SDK that lets developers customize open models and agent experiences'
   
+  // Remove "nextra" from titles
+  const title = removeNextra(rawTitle)
+  const documentTitle = removeNextra(rawDocumentTitle)
+  
   // Extract description from frontmatter or generate from content
-  const description = frontmatter.description || 
+  const rawDescription = frontmatter.description || 
     frontmatter.excerpt ||
     (content ? extractDescription(content) : "Tilekit is a Rust-based declarative, cross-platform Modelfile-based SDK that lets developers customize open models and agent experiences. Build, run, and share fine-tuned open models with ease.")
+  
+  // Remove "nextra" from description
+  const description = removeNextra(rawDescription)
   
   // Determine content type based on path or frontmatter
   const type = frontmatter.type || 

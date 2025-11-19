@@ -19,6 +19,7 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'Tilekit',
   },
+  titleSuffix: '',
   // OpenGraph configuration
   // Custom theme colors
   primaryHue: {

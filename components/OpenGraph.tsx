@@ -1,5 +1,18 @@
 import Head from 'next/head'
 
+function removeNextra(text: string): string {
+  if (!text) return text
+  // Remove "nextra" (case-insensitive) from the text
+  // Handles various patterns like " - Nextra", " | Nextra", "Nextra -", etc.
+  return text
+    .replace(/\s*[-|–—]\s*nextra\s*/gi, '')
+    .replace(/\s*nextra\s*[-|–—]\s*/gi, '')
+    .replace(/\s+nextra\s+/gi, ' ')
+    .replace(/^nextra\s+/gi, '')
+    .replace(/\s+nextra$/gi, '')
+    .trim()
+}
+
 interface OpenGraphProps {
   title?: string
   documentTitle?: string
@@ -32,8 +45,8 @@ export function OpenGraph({
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tiles.run'
   const fullUrl = url ? `${baseUrl}${url}` : baseUrl
   
-  // Use static dark.png image for OpenGraph
-  const ogImageUrl = image || `${baseUrl}/dark.png`
+  // Generate dynamic OpenGraph image using the API endpoint
+  const ogImageUrl = image || `${baseUrl}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&type=${type}`
 
   // Structured Data (JSON-LD)
   const structuredData = {

@@ -2,13 +2,21 @@ import { ImageResponse } from "next/og"
 
 export const runtime = "edge"
 
-export default async function handler() {
+export default async function handler(request: Request) {
   // Fetch the dark.png image (the "T" logo)
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
   const imageResponse = await fetch(`${baseUrl}/dark.png`)
   const imageData = await imageResponse.arrayBuffer()
   const imageBase64 = Buffer.from(imageData).toString('base64')
   const imageDataUrl = `data:image/png;base64,${imageBase64}`
+  
+  // Get query parameters if provided
+  const { searchParams } = new URL(request.url)
+  const title = searchParams.get('title') || 'Modelfile based SDK that lets developers customize open models and agent experiences'
+  const description = searchParams.get('description') || 'Modelfile based SDK that lets developers customize open models and agent experiences'
+  
+  // Use description if provided, otherwise use title, fallback to default
+  const displayText = description || title || 'Modelfile based SDK that lets developers customize open models and agent experiences'
   
   return new ImageResponse(
     <div
@@ -19,7 +27,7 @@ export default async function handler() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#0D0E0C",
+        backgroundColor: "#0E0E0D",
         padding: "60px",
       }}
     >
@@ -54,7 +62,7 @@ export default async function handler() {
           fontFamily: "system-ui, -apple-system, sans-serif",
         }}
       >
-        Tilekit: Modelfile based SDK that lets developers customize open models and agent experiences
+        {displayText}
       </div>
     </div>,
     {
