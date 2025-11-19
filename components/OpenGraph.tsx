@@ -15,8 +15,8 @@ interface OpenGraphProps {
 }
 
 export function OpenGraph({
-  title = 'Tilekit is a declarative, cross-platform Modelfile-based SDK that enables developers to customize open models and agent experiences.',
-  description = "We're building the open source technology to make local-first personal models ubiquitous. Our goal is to evolve Modelfile in collaboration with the community and establish it as the standard for model customization.",
+  title = 'Tilekit - Modelfile based SDK that lets developers customize open models and agent experiences.',
+  description = "Tilekit is a Rust-based declarative, cross-platform Modelfile-based SDK that lets developers customize open models and agent experiences. Build, run, and share fine-tuned open models with ease.",
   type = 'website',
   url,
   image,
@@ -30,14 +30,40 @@ export function OpenGraph({
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tiles.run'
   const fullUrl = url ? `${baseUrl}${url}` : baseUrl
   
-  // Generate dynamic OG image URL
-  const ogImageUrl = image || `${baseUrl}/api/og?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&type=${type}`
+  // Use static dark.png image for OpenGraph
+  const ogImageUrl = image || `${baseUrl}/dark.png`
+
+  // Structured Data (JSON-LD)
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': type === 'article' ? 'Article' : 'WebSite',
+    name: siteName,
+    headline: title,
+    description: description,
+    url: fullUrl,
+    image: ogImageUrl,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Tilekit',
+      url: baseUrl,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Tilekit',
+      url: baseUrl,
+    },
+  }
 
   return (
     <Head>
       {/* Basic Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="keywords" content="Tilekit, Modelfile, Rust SDK, open models, AI models, model customization, agent experiences, Ollama, machine learning, LLM, fine-tuning" />
+      <meta name="author" content="Tilekit" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="language" content="English" />
+      <meta httpEquiv="content-language" content="en-US" />
       
       {/* Open Graph Meta Tags */}
       <meta property="og:title" content={title} />
@@ -47,6 +73,7 @@ export function OpenGraph({
       <meta property="og:image" content={ogImageUrl} />
       <meta property="og:image:width" content={imageWidth.toString()} />
       <meta property="og:image:height" content={imageHeight.toString()} />
+      <meta property="og:image:alt" content={title} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content="en_US" />
       
@@ -57,13 +84,28 @@ export function OpenGraph({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImageUrl} />
+      <meta name="twitter:image:alt" content={title} />
       
       {/* Additional Meta Tags */}
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#667eea" />
+      <meta name="format-detection" content="telephone=no" />
       
       {/* Canonical URL */}
       <link rel="canonical" href={fullUrl} />
+      
+      {/* Favicon Links */}
+      <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="manifest" href="/site.webmanifest" />
+      
+      {/* Structured Data (JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
     </Head>
   )
 }

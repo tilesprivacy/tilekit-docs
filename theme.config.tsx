@@ -6,7 +6,7 @@ const config: DocsThemeConfig = {
   logo: (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
       <Logo width={24} height={24} />
-      <span>Tilekit</span>
+      <span>Tilekit SDK</span>
     </div>
   ),
   project: {
@@ -37,6 +37,11 @@ const config: DocsThemeConfig = {
   head: (
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="keywords" content="Tilekit, Modelfile, Rust SDK, open models, AI models, model customization, agent experiences, Ollama, machine learning, LLM, fine-tuning" />
+      <meta name="author" content="Tilekit" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="language" content="English" />
+      <meta httpEquiv="content-language" content="en-US" />
       <meta property="og:site_name" content="Tilekit" />
       <meta property="og:locale" content="en_US" />
       <meta name="twitter:site" content="@tileslauncher" />

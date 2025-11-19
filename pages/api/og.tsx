@@ -3,6 +3,13 @@ import { ImageResponse } from "next/og"
 export const runtime = "edge"
 
 export default async function handler() {
+  // Fetch the dark.png image (the "T" logo)
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
+  const imageResponse = await fetch(`${baseUrl}/dark.png`)
+  const imageData = await imageResponse.arrayBuffer()
+  const imageBase64 = Buffer.from(imageData).toString('base64')
+  const imageDataUrl = `data:image/png;base64,${imageBase64}`
+  
   return new ImageResponse(
     <div
       style={{
@@ -12,31 +19,42 @@ export default async function handler() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#ffffff",
-        fontSize: 60,
-        fontWeight: 600,
+        backgroundColor: "#0D0E0C",
+        padding: "60px",
       }}
     >
+      {/* Stylized "T" logo in upper half */}
       <div
         style={{
-          color: "#000000",
-          marginBottom: 20,
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "40px",
         }}
       >
-        tilekit
+        <img
+          src={imageDataUrl}
+          alt="Tilekit Logo"
+          style={{
+            width: "200px",
+            height: "200px",
+            objectFit: "contain",
+          }}
+        />
       </div>
+      
+      {/* Text below the logo */}
       <div
         style={{
-          color: "#000000",
-          fontSize: 24,
+          color: "#ffffff",
+          fontSize: 28,
           textAlign: "center",
-          maxWidth: 800,
+          maxWidth: 900,
           lineHeight: 1.4,
           fontFamily: "system-ui, -apple-system, sans-serif",
         }}
       >
-        Modelfile-based SDK that enables developers to customize open models and agent experiences.
+        Tilekit: Modelfile based SDK that lets developers customize open models and agent experiences.
       </div>
     </div>,
     {

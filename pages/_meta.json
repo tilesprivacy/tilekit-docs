@@ -1,7 +1,7 @@
 {
   "index": "Tilekit",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "concepts": "Concepts",
+  "reference": "Reference",
   "contact": {
     "title": "Tiles ↗",
     "type": "page",
