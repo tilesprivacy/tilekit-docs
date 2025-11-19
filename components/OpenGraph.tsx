@@ -2,6 +2,7 @@ import Head from 'next/head'
 
 interface OpenGraphProps {
   title?: string
+  documentTitle?: string
   description?: string
   type?: 'website' | 'article' | 'book' | 'profile' | 'music.song' | 'music.album' | 'music.playlist' | 'music.radio_station' | 'video.movie' | 'video.episode' | 'video.tv_show' | 'video.other'
   url?: string
@@ -15,7 +16,8 @@ interface OpenGraphProps {
 }
 
 export function OpenGraph({
-  title = 'Tilekit - Modelfile based SDK that lets developers customize open models and agent experiences.',
+  title = 'Tilekit: Modelfile based SDK that lets developers customize open models and agent experiences.',
+  documentTitle,
   description = "Tilekit is a Rust-based declarative, cross-platform Modelfile-based SDK that lets developers customize open models and agent experiences. Build, run, and share fine-tuned open models with ease.",
   type = 'website',
   url,
@@ -57,7 +59,7 @@ export function OpenGraph({
   return (
     <Head>
       {/* Basic Meta Tags */}
-      <title>{title}</title>
+      <title>{documentTitle || title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content="Tilekit, Modelfile, Rust SDK, open models, AI models, model customization, agent experiences, Ollama, machine learning, LLM, fine-tuning" />
       <meta name="author" content="Tilekit" />

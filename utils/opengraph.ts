@@ -1,5 +1,6 @@
 export interface OpenGraphData {
   title: string
+  documentTitle?: string
   description: string
   type: 'website' | 'article' | 'book' | 'profile' | 'music.song' | 'music.album' | 'music.playlist' | 'music.radio_station' | 'video.movie' | 'video.episode' | 'video.tv_show' | 'video.other'
   url?: string
@@ -18,8 +19,11 @@ export function generateOpenGraphData(
   path?: string
 ): OpenGraphData {
   // Extract title from frontmatter or use global default
-  const title = frontmatter.title ||
-    'Tilekit - Modelfile based SDK that lets developers customize open models and agent experiences.'
+  const title = frontmatter.ogTitle ||
+    frontmatter.title ||
+    'Tilekit: Modelfile based SDK that lets developers customize open models and agent experiences.'
+  const documentTitle = frontmatter.title ||
+    'Modelfile based SDK that lets developers customize open models and agent experiences'
   
   // Extract description from frontmatter or generate from content
   const description = frontmatter.description || 
@@ -37,6 +41,7 @@ export function generateOpenGraphData(
   
   return {
     title,
+    documentTitle,
     description,
     type,
     url: path,

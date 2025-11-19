@@ -54,7 +54,7 @@ export default async function handler() {
           fontFamily: "system-ui, -apple-system, sans-serif",
         }}
       >
-        Tilekit: Modelfile based SDK that lets developers customize open models and agent experiences.
+        Tilekit: Modelfile based SDK that lets developers customize open models and agent experiences
       </div>
     </div>,
     {
