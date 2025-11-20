@@ -42,7 +42,7 @@ export function OpenGraph({
   twitterSite = '@tileslauncher',
   twitterCreator = '@tileslauncher',
 }: OpenGraphProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tiles.run'
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tilekit.dev'
   const fullUrl = url ? `${baseUrl}${url}` : baseUrl
   
   // Use static OpenGraph image
