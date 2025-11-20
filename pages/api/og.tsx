@@ -1,23 +1,14 @@
-import { ImageResponse } from "next/og"
+import { ImageResponse } from "@vercel/og"
 
 export const runtime = "edge"
 
-export default async function handler(request: Request) {
-  // Fetch the dark.png image (the "T" logo)
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000')
-  const imageResponse = await fetch(`${baseUrl}/dark.png`)
-  const imageData = await imageResponse.arrayBuffer()
-  const imageBase64 = Buffer.from(imageData).toString('base64')
-  const imageDataUrl = `data:image/png;base64,${imageBase64}`
-  
-  // Get query parameters if provided
-  const { searchParams } = new URL(request.url)
-  const title = searchParams.get('title') || 'Modelfile based SDK that lets developers customize open models and agent experiences'
-  const description = searchParams.get('description') || 'Modelfile based SDK that lets developers customize open models and agent experiences'
-  
-  // Use description if provided, otherwise use title, fallback to default
-  const displayText = description || title || 'Modelfile based SDK that lets developers customize open models and agent experiences'
-  
+const LOGO_PATH = "/dark.png"
+const OG_TEXT =
+  "Modelfile based SDK that lets developers customize open models and agent experiences"
+
+export default function handler(request: Request) {
+  const logoUrl = new URL(LOGO_PATH, request.url).toString()
+
   return new ImageResponse(
     <div
       style={{
@@ -28,41 +19,39 @@ export default async function handler(request: Request) {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#0E0E0D",
-        padding: "60px",
+        padding: "72px 96px",
+        gap: 48,
       }}
     >
-      {/* Stylized "T" logo in upper half */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: "40px",
         }}
       >
         <img
-          src={imageDataUrl}
-          alt="Tilekit Logo"
+          src={logoUrl}
+          alt="Tilekit logo"
           style={{
-            width: "200px",
-            height: "200px",
+            width: 200,
+            height: 200,
             objectFit: "contain",
           }}
         />
       </div>
-      
-      {/* Text below the logo */}
+
       <div
         style={{
-          color: "#ffffff",
-          fontSize: 28,
-          textAlign: "center",
-          maxWidth: 900,
+          color: "#FFFFFF",
+          fontSize: 34,
           lineHeight: 1.4,
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          textAlign: "center",
+          maxWidth: 880,
+          fontFamily: "Inter, 'Helvetica Neue', Arial, sans-serif",
         }}
       >
-        {displayText}
+        {OG_TEXT}
       </div>
     </div>,
     {
