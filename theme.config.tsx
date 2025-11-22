@@ -29,7 +29,7 @@ const config: DocsThemeConfig = {
     ),
   },
   footer: {
-    text: '© 2025 Tiles Privacy',
+    text: '(C) Tiles Privacy — 2025',
   },
   // OpenGraph configuration
   // Custom theme colors
