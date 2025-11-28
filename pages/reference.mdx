@@ -197,10 +197,51 @@ Foundational network and technique types.
 
 Implementation details based on version-breaking changes, configuration inconsistencies, or other conflicting indicators that have practical application.
 
-#### Goals
+### Notes
 
-- Standard identification scheme for **ALL** fields of ML-related development
-- Simplification of code for model-related logistics
-- Rapid retrieval of resources and metadata
-- Efficient and reliable compatibility checks
-- Organized hyperparameter management
+For domains field in MIR:
+
+
+#### ↑Most Specific/Decentralized
+
+##### Dev   
+
+**Pre-release or under evaluation items without an identifier in an expected format**
+Anything in in-training, pre-public release, and items under evaluation
+
+Meant to be created by anyone, derived from code and file analysis
+- Contextual
+- Layers of neural networks
+- Dynamic
+
+##### Model
+
+**Publicly released machine learning models with an identifier in the database**
+Model weight tensors with arbitrary locations and quantitative dimensions
+
+Meant to be created by file hosts, derived from research pre-prints
+- Contextual
+- Layers of neural networks
+- Fixed
+
+##### Ops
+
+**References to specific optimization or manipulation techniques**
+Algorithms, optimizations and procedures for models
+
+Meant to be created by code libraries, derived from research pre-prints
+- Universal
+- Attributes of neural networks
+- Dynamic
+
+##### Info  
+
+**Metadata of layer names or settings with an identifier in the database**
+Information about the model and tensor specifications
+
+Meant to be created by standards community, derived from code and file analysis
+- Universal
+- Attributes of neural networks
+- Fixed
+
+#### ↓Most General/Centralized
