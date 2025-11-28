@@ -1,10 +1,8 @@
-# Implementation Reference
+## Modelfile Reference
 
-## Data Structures
+### Main Structure
 
-### Modelfile
-
-The main structure representing a parsed Modelfile:
+Represents a parsed Modelfile:
 
 ```rust
 pub struct Modelfile {
@@ -20,9 +18,7 @@ pub struct Modelfile {
 }
 ```
 
-### Parameter
-
-Represents a model parameter:
+#### Parameter
 
 ```rust
 pub struct Parameter {
@@ -31,9 +27,7 @@ pub struct Parameter {
 }
 ```
 
-### ParamValue
-
-The value type for parameters:
+#### ParamValue
 
 ```rust
 pub enum ParamValue {
@@ -43,9 +37,7 @@ pub enum ParamValue {
 }
 ```
 
-### Message
-
-Represents a message example:
+#### Message
 
 ```rust
 pub struct Message {
@@ -54,77 +46,59 @@ pub struct Message {
 }
 ```
 
-## API
+### API
 
-### Parsing Functions
+#### Parsing Functions
 
-**`parse(input: &str) -> Result<Modelfile, String>`**
+- **`parse(input: &str) -> Result<Modelfile, String>`**  
+  Parses a Modelfile from a string. Returns a `Modelfile` struct on success, or an error string on failure.
+- **`parse_from_file(path: &str) -> Result<Modelfile, String>`**  
+  Parses a Modelfile from a file path. Reads the file and calls `parse()` on its contents.
 
-- Parses a Modelfile from a string
-- Returns a `Modelfile` struct on success, or an error string on failure
+#### Builder API
 
-**`parse_from_file(path: &str) -> Result<Modelfile, String>`**
+- `new() -> Modelfile` — Creates a new empty Modelfile
+- `add_from(value: &str) -> Result<(), String>` — Adds a FROM instruction
+- `add_parameter(param_type: &str, param_value: &str) -> Result<(), String>` — Adds a PARAMETER
+- `add_template(value: &str) -> Result<(), String>` — Adds a TEMPLATE instruction
+- `add_system(value: &str) -> Result<(), String>` — Adds a SYSTEM instruction
+- `add_adapter(value: &str) -> Result<(), String>` — Adds an ADAPTER instruction
+- `add_license(value: &str) -> Result<(), String>` — Adds a LICENSE instruction
+- `add_message(role: &str, message: &str) -> Result<(), String>` — Adds a MESSAGE instruction
+- `add_comment(value: &str) -> Result<(), String>` — Adds a comment
+- `build() -> Result<(), String>` — Validates the Modelfile (checks for required FROM)
 
-- Parses a Modelfile from a file path
-- Reads the file and calls `parse()` on its contents
+#### Traits
 
-### Builder API
+- `FromStr` — Allows parsing from string: `modelfile.parse()`
+- `Display` — Allows conversion to string: `modelfile.to_string()`
+- `Default` — Provides default empty Modelfile
 
-The `Modelfile` struct provides a builder API for programmatic construction:
+### Validation Rules
 
-- `new() -> Modelfile` - Creates a new empty Modelfile
-- `add_from(value: &str) -> Result<(), String>` - Adds a FROM instruction
-- `add_parameter(param_type: &str, param_value: &str) -> Result<(), String>` - Adds a PARAMETER
-- `add_template(value: &str) -> Result<(), String>` - Adds a TEMPLATE instruction
-- `add_system(value: &str) -> Result<(), String>` - Adds a SYSTEM instruction
-- `add_adapter(value: &str) -> Result<(), String>` - Adds an ADAPTER instruction
-- `add_license(value: &str) -> Result<(), String>` - Adds a LICENSE instruction
-- `add_message(role: &str, message: &str) -> Result<(), String>` - Adds a MESSAGE instruction
-- `add_comment(value: &str) -> Result<(), String>` - Adds a comment
-- `build() -> Result<(), String>` - Validates the Modelfile (checks for required FROM)
+1. **Required FROM**: A Modelfile must contain exactly one `FROM` instruction.
+2. **Single-instruction limits**: The following can only appear once: `FROM`, `TEMPLATE`, `SYSTEM`, `ADAPTER`, `LICENSE`.
+3. **Parameter validation**: Parameters are validated for correct types (int/float/string).
+4. **Role validation**: MESSAGE roles must be one of: `system`, `user`, `assistant`.
+5. **Case insensitivity**: All instruction and parameter names are case-insensitive.
 
-### Traits
+### Error Handling
 
-- `FromStr` - Allows parsing from string: `modelfile.parse()`
-- `Display` - Allows conversion to string: `modelfile.to_string()`
-- `Default` - Provides default empty Modelfile
+- Parsing errors are collected in the `errors` field.
+- `parse()` returns an error string containing all error messages if any errors occur.
+- The parser continues parsing after errors to collect all issues.
 
-## Validation Rules
+### Implementation Details
 
-1. **Required FROM**: A Modelfile must contain exactly one `FROM` instruction
+- Uses the `nom` parser combinator library for parsing.
+- Instructions are parsed case-insensitively.
+- Whitespace is trimmed from argument values.
+- The parser preserves original lines in the `data` field for display.
+- Comments are preserved when converting back to string.
 
-2. **Single-instruction limits**: The following instructions can only appear once:
-   - `FROM`
-   - `TEMPLATE`
-   - `SYSTEM`
-   - `ADAPTER`
-   - `LICENSE`
+### Example Usage
 
-3. **Parameter validation**: Parameters are validated for correct types (int/float/string)
-
-4. **Role validation**: MESSAGE roles must be one of: `system`, `user`, `assistant`
-
-5. **Case insensitivity**: All instruction names and parameter names are case-insensitive
-
-## Error Handling
-
-The parser collects errors during parsing and validation:
-
-- Parsing errors are collected in the `errors` field
-- If any errors occur, `parse()` returns an error string containing all error messages
-- The parser continues parsing even after encountering errors to collect all issues
-
-## Implementation Details
-
-- Uses the `nom` parser combinator library for parsing
-- Instructions are parsed case-insensitively
-- Whitespace is trimmed from argument values
-- The parser preserves original lines in the `data` field for display purposes
-- Comments are preserved in the output when converting back to string
-
-## Example Usage
-
-### Parsing from file:
+#### Parsing from file
 
 ```rust
 use tiles::core::modelfile::parse_from_file;
@@ -132,7 +106,7 @@ use tiles::core::modelfile::parse_from_file;
 let modelfile = parse_from_file("path/to/Modelfile")?;
 ```
 
-### Parsing from string:
+#### Parsing from string
 
 ```rust
 use tiles::core::modelfile::parse;
@@ -146,7 +120,7 @@ SYSTEM "You are helpful"
 let modelfile = parse(content)?;
 ```
 
-### Building programmatically:
+#### Building programmatically
 
 ```rust
 use tiles::core::modelfile::Modelfile;
@@ -158,10 +132,73 @@ modelfile.add_system("You are helpful")?;
 modelfile.build()?;
 ```
 
-## Notes
+### Notes
 
-- The implementation is based on the Ollama Modelfile specification
-- Not all Ollama Modelfile features may be implemented
-- The parser is designed to be compatible with Ollama-generated Modelfiles
-- Future enhancements may include validation for GGUF file paths in FROM instructions
+- Implementation is based on the Ollama Modelfile specification.
+- Not all Ollama Modelfile features may be implemented.
+- The parser is compatible with Ollama-generated Modelfiles.
+- Future enhancements may validate GGUF file paths in FROM instructions.
 
+## MIR Reference
+
+Copied from their README at [darkshapes/MIR_/blob/main/README.md](https://huggingface.co/darkshapes/MIR_/blob/main/README.md):
+
+#
+
+> [!IMPORTANT]  
+> # MIR (Machine Intelligence Resource)<br/><br/>A naming schema for AIGC/ML work.
+
+The MIR classification format seeks to standardize and complete a hyperlinked network of model information, improving accessibility and reproducibility across the AI community.<br/>
+The work is inspired by:
+- [AIR-URN](https://github.com/civitai/civitai/wiki/AIR-%E2%80%90-Uniform-Resource-Names-for-AI) project by [CivitAI](https://civitai.com/)
+- [Spandrel](https://github.com/chaiNNer-org/spandrel/blob/main/libs/spandrel/spandrel/__helpers/registry.py) library's super-resolution registry
+
+Example:
+
+> [!NOTE]
+> # mir : model . transformer . clip-l : stable-diffusion-xl
+
+```
+ mir : model .    lora      .    hyper    :   flux-1
+  ↑      ↑         ↑               ↑            ↑
+ [URI]:[Domain].[Architecture].[Series]:[Compatibility]
+```
+
+Code for this project can be found at [darkshapes/MIR on GitHub](https://github.com/darkshapes/MIR)
+
+### Definitions
+
+Like other URI schema, the order of the identifiers roughly indicates their specificity from left (broad) to right (narrow).
+
+#### Domains
+
+- `dev`: Varying local neural network layers, in-training, pre-release, items under evaluation, likely in unexpected formats  
+- `model`: Static local neural network layers. Publicly released machine learning models with an identifier in the database  
+- `operations`: Varying global neural network attributes, algorithms, optimizations and procedures on models  
+- `info`:  Static global neural network attributes, metadata with an identifier in the database  
+
+#### Architecture
+
+Broad and general terms for system architectures:
+- `dit`: Diffusion transformer, typically Vision Synthesis
+- `unet`: Unet diffusion structure
+- `art`: Autoregressive transformer, typically LLMs
+- `lora`: Low-Rank Adapter (may work with dit or transformer)
+- `vae`: Variational Autoencoder
+- etc
+
+#### Series
+
+Foundational network and technique types.
+
+#### Compatibility
+
+Implementation details based on version-breaking changes, configuration inconsistencies, or other conflicting indicators that have practical application.
+
+#### Goals
+
+- Standard identification scheme for **ALL** fields of ML-related development
+- Simplification of code for model-related logistics
+- Rapid retrieval of resources and metadata
+- Efficient and reliable compatibility checks
+- Organized hyperparameter management

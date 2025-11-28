@@ -2,7 +2,7 @@
 
 This document describes the Modelfile implementation in this Rust-based codebase. The implementation is based on the [Ollama Modelfile specification](https://github.com/ollama/ollama/blob/main/docs/modelfile.md). We are gradually adding support for the Modelfile specification in our Rust based implementation, and our goal is to evolve Modelfile in collaboration with the community and establish it as a standard for model customization.
 
-To begin with, we are collaborating with the [Darkshapes](https://darkshapes.org) team to support the [MIR](https://huggingface.co/darkshapes/MIR_) (Machine Intelligence Resource) model naming scheme in our FROM directive while maintaining full backward compatibility with the Ollama implementation. For model layering, we will use the open source implementation from Hugging Face in [xet-core](https://github.com/huggingface/xet-core).
+To begin with, we are collaborating with the [Darkshapes](https://darkshapes.org) team to support the [MIR](https://huggingface.co/darkshapes/MIR_) (Machine Intelligence Resource) model naming scheme for our Modelfile implementation while maintaining full backward compatibility with the Ollama's implementation. Learn more about how we are thinking of this model deployment problem space in our proposal [here](https://www.tilekit.dev/proposal). We support Hugging Face today and plan to build our own registry later, using the open source implementation in [xet-core](https://github.com/huggingface/xet-core) for model layering.
 
 ## Overview
 
