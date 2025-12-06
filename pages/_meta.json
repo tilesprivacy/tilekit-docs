@@ -1,8 +1,8 @@
 {
   "index": "Tilekit",
-  "registry": "Registry",
   "proposal": "Proposal",
   "implementation": "Implementation",
+  "registry": "Registry",
   "reference": "Reference",
   "blog": {
     "title": "Blog",
