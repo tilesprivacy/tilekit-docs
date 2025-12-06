@@ -1,5 +1,6 @@
 {
   "index": "Tilekit",
+  "registry": "Registry",
   "proposal": "Proposal",
   "implementation": "Implementation",
   "reference": "Reference",
