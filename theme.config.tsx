@@ -71,7 +71,7 @@ const config: DocsThemeConfig = {
   useNextSeoProps() {
     return {
       titleTemplate: '%s',
-      defaultTitle: 'Tilekit SDK Developer Preview',
+      defaultTitle: 'Tilekit SDK',
     }
   },
 }
